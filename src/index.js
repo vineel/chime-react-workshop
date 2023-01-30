@@ -90,7 +90,7 @@ const MyBlurryApp = () => {
   const appContent = (
     <div>
       {isBackgroundBlurSupported && (
-        <div>aaaaaaaaa
+        <div>
           <button id='join' onClick={() => {joinMeeting(meetingManager)}}>
             Join Meeting
           </button>
@@ -101,7 +101,7 @@ const MyBlurryApp = () => {
           </button>
           <button onClick={toggleVideo}>
           {isVideoEnabled ? 'Stop your video' : 'Start your video'}
-        </button>bbbbb
+        </button>
         </div>
       )}
       <hr></hr>

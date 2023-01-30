@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import MyApp from './App';
 import { ThemeProvider } from 'styled-components';
@@ -65,6 +65,16 @@ const MyBlurryApp = () => {
   const { selectedDevice } = useVideoInputs();
   const { isBackgroundBlurSupported, createBackgroundBlurDevice } = useBackgroundBlur();
   const [isVideoTransformCheckBoxOn, setisVideoTransformCheckBoxOn] = useState(false);
+
+  useEffect(async function toggleBgBlur() {
+    let currentDevice = selectedDevice;
+    if (isVideoTransformCheckBoxOn) {
+      currentDevice = await createBackgroundBlurDevice(selectedDevice);
+    } else {
+      currentDevice = await selectedDevice.intrinsicDevice();
+    }
+    await meetingManager.startVideoInputDevice(currentDevice);
+  }, [isVideoTransformCheckBoxOn]);
 
   // join a meeting from the query string
   const queryString = window.location.search;
